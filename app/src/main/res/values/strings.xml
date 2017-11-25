@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">mBus</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="revoke_access">Revoke Access</string>
+    <string name="status">Status</string>
+    <string name="signing_in">Signing In</string>
 </resources>

@@ -13,7 +13,7 @@ public class mBus_SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, mBus_HomeScreen.class);
+        Intent intent = new Intent(this, mBus_SignInActivity.class);
         startActivity(intent);
         finish();
     }
