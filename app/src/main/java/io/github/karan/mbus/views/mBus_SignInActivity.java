@@ -19,6 +19,7 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
+import com.sdsmdg.tastytoast.TastyToast;
 
 public class mBus_SignInActivity extends FragmentActivity implements
         ConnectionCallbacks, OnConnectionFailedListener,
@@ -127,6 +128,8 @@ public class mBus_SignInActivity extends FragmentActivity implements
                 mGoogleApiClient.connect();
             }
         } else {
+            TastyToast.makeText(getApplicationContext(), "Play services error!",
+                    TastyToast.LENGTH_LONG, TastyToast.ERROR);
             // You have a play services error -- inform the user
         }
     }

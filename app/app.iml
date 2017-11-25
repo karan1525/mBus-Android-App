@@ -166,6 +166,7 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-vision-license-11.6.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-storage-common-license-11.6.0" level="project" />
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-26.1.0" level="project" />
+    <orderEntry type="library" name="com.facebook.rebound:rebound:0.3.8@jar" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-database-11.6.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-appindexing-11.6.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-tagmanager-api-11.6.0" level="project" />
@@ -175,6 +176,7 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-awareness-11.6.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-tagmanager-11.6.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-26.1.0" level="project" />
+    <orderEntry type="library" name="com.sdsmdg.tastytoast:tastytoast-0.1.1" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-nearby-license-11.6.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-drive-11.6.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-tagmanager-v4-impl-11.6.0" level="project" />
