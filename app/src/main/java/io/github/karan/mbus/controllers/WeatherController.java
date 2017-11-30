@@ -1,6 +1,8 @@
 package io.github.karan.mbus.controllers;
 
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -27,6 +29,7 @@ public class WeatherController {
 
     private static final String OPEN_WEATHER_MAP_API = "4ae909e1d65e7915de8daa8f2c5faf8a";
 
+    @NonNull
     private static String setWeatherIcon(int actualId, long sunrise, long sunset){
         int id = actualId / 100;
         String icon = "";
@@ -65,12 +68,14 @@ public class WeatherController {
 
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
 
+        @Nullable
         private AsyncResponse delegate = null;//Call back interface
 
-        public placeIdTask(AsyncResponse asyncResponse) {
+        public placeIdTask(@Nullable AsyncResponse asyncResponse) {
             delegate = asyncResponse;//Assigning call back interface through constructor
         }
 
+        @Nullable
         @Override
         protected JSONObject doInBackground(String... params) {
 
@@ -85,7 +90,7 @@ public class WeatherController {
         }
 
         @Override
-        protected void onPostExecute(JSONObject json) {
+        protected void onPostExecute(@Nullable JSONObject json) {
             try {
                 if (json != null) {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
@@ -95,7 +100,8 @@ public class WeatherController {
 
                     String city = json.getString("name").toUpperCase(Locale.US) + ", " +
                             json.getJSONObject("sys").getString("country");
-                    String description = details.getString("description").toUpperCase(Locale.US);
+                    String description = details.getString
+                            ("description").toUpperCase(Locale.US);
                     String temperature = String.format(java.util.Locale.US,"%.2f",
                             main.getDouble("temp")) + "°";
                     String humidity = main.getString("humidity") + "%";
@@ -105,6 +111,7 @@ public class WeatherController {
                             json.getJSONObject("sys").getLong("sunrise") * 1000,
                             json.getJSONObject("sys").getLong("sunset") * 1000);
 
+                    assert delegate != null;
                     delegate.processFinish(city, description, temperature, humidity, pressure,
                             updatedOn, iconText, "" + (
                                     json.getJSONObject("sys").getLong("sunrise") * 1000));
@@ -151,6 +158,5 @@ public class WeatherController {
             return null;
         }
     }
-
 
 }

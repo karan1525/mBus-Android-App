@@ -11,17 +11,20 @@ import io.github.karan.mbus.controllers.WeatherController;
 
 public class mBus_WeatherActivity extends AppCompatActivity {
 
-    TextView cityField, detailsField,
-            currentTemperatureField, humidity_field,
-            pressure_field, weatherIcon, updatedField;
-    Typeface weatherFont;
+    private TextView cityField;
+    private TextView detailsField;
+    private TextView currentTemperatureField;
+    private TextView humidity_field;
+    private TextView pressure_field;
+    private TextView weatherIcon;
+    private TextView updatedField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_bus__weather);
 
-        weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(),
+        Typeface weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(),
                 "fonts/weathericons-regular-webfont.ttf");
 
         cityField = findViewById(R.id.city_field);
@@ -33,8 +36,13 @@ public class mBus_WeatherActivity extends AppCompatActivity {
         weatherIcon = findViewById(R.id.weather_icon);
         weatherIcon.setTypeface(weatherFont);
 
-        WeatherController.placeIdTask asyncTask =new WeatherController.placeIdTask(new WeatherController.AsyncResponse() {
-            public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_pressure, String weather_updatedOn, String weather_iconText, String sun_rise) {
+        WeatherController.placeIdTask asyncTask =
+                new WeatherController.placeIdTask(new WeatherController.AsyncResponse() {
+
+            public void processFinish(
+                    String weather_city, String weather_description, String weather_temperature,
+                    String weather_humidity, String weather_pressure, String weather_updatedOn,
+                    String weather_iconText, String sun_rise) {
 
                 cityField.setText(weather_city);
                 updatedField.setText(weather_updatedOn);
@@ -52,4 +60,3 @@ public class mBus_WeatherActivity extends AppCompatActivity {
 
     }
 }
-

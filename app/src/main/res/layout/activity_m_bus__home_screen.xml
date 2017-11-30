@@ -19,6 +19,6 @@
         android:id="@+id/weather_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Weather Check" />
+        android:text="@string/weather_check" />
 
 </android.support.constraint.ConstraintLayout>
