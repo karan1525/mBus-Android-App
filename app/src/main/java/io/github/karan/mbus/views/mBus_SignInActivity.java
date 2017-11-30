@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
 import com.sdsmdg.tastytoast.TastyToast;
 
+@SuppressWarnings("ALL")
 public class mBus_SignInActivity extends FragmentActivity implements
         ConnectionCallbacks, OnConnectionFailedListener,
         View.OnClickListener {
@@ -33,6 +35,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
 
     private GoogleApiClient mGoogleApiClient;
     private int mSignInProgress;
+    @Nullable
     private PendingIntent mSignInIntent;
 
     private SignInButton mSignInButton;
@@ -40,7 +43,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
     private Button mRevokeButton;
     private TextView mStatus;
 
-    private String TAG = "SignInActivity";
+    private final String TAG = "SignInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +113,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
         }
     }
 
-    public void goToHomeScreen() {
+    private void goToHomeScreen() {
         if(mSignInProgress == 0) {
             Intent intent = new Intent(this, mBus_HomeScreen.class);
             startActivity(intent);
@@ -174,7 +177,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         if (!mGoogleApiClient.isConnecting()) {
             switch (v.getId()) {
                 case R.id.sign_in_button:
