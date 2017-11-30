@@ -99,7 +99,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
 
         // Indicate that the sign in process is complete.
         mSignInProgress = SIGNED_IN;
-//        goToHomeScreen();
+        goToHomeScreen();
 
         try {
             String emailAddress = Plus.AccountApi.getAccountName(mGoogleApiClient);
@@ -115,7 +115,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
 
     private void goToHomeScreen() {
         if(mSignInProgress == 0) {
-            Intent intent = new Intent(this, mBus_HomeScreen.class);
+            Intent intent = new Intent(this, mBus_HomeActivity.class);
             startActivity(intent);
             finish();
         }
