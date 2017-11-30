@@ -4,7 +4,7 @@
     <item android:drawable="@color/White" />
 
     <item>
-        <bitmap android:src="@mipmap/logo"
+        <bitmap android:src="@drawable/logo"
             android:gravity="center" />
 
     </item>

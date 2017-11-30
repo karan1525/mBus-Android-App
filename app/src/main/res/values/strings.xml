@@ -4,4 +4,5 @@
     <string name="revoke_access">Revoke Access</string>
     <string name="status">Status</string>
     <string name="signing_in">Signing In</string>
+    <string name="signed_out">Signed out</string>
 </resources>

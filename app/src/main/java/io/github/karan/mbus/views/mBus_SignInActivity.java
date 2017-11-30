@@ -6,6 +6,7 @@ import android.content.IntentSender;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +39,8 @@ public class mBus_SignInActivity extends FragmentActivity implements
     private Button mSignOutButton;
     private Button mRevokeButton;
     private TextView mStatus;
+
+    private String TAG = "SignInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
 
         // Indicate that the sign in process is complete.
         mSignInProgress = SIGNED_IN;
+        goToHomeScreen();
 
         try {
             String emailAddress = Plus.AccountApi.getAccountName(mGoogleApiClient);
@@ -101,9 +105,19 @@ public class mBus_SignInActivity extends FragmentActivity implements
         catch(Exception ex){
             String exception = ex.getLocalizedMessage();
             String exceptionString = ex.toString();
-            // Note that you should log these errors in a 'real' app to aid in debugging
+            Log.d(TAG, exception);
+            Log.d(TAG, exceptionString);
         }
     }
+
+    public void goToHomeScreen() {
+        if(mSignInProgress == 0) {
+            Intent intent = new Intent(this, mBus_HomeScreen.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult result) {
@@ -113,7 +127,6 @@ public class mBus_SignInActivity extends FragmentActivity implements
                 resolveSignInError();
             }
         }
-        // Will implement shortly
         onSignedOut();
     }
 
@@ -130,7 +143,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
         } else {
             TastyToast.makeText(getApplicationContext(), "Play services error!",
                     TastyToast.LENGTH_LONG, TastyToast.ERROR);
-            // You have a play services error -- inform the user
+            Log.d(TAG, "Play Services Error!");
         }
     }
 
@@ -157,7 +170,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
         mSignOutButton.setEnabled(false);
         mRevokeButton.setEnabled(false);
 
-        mStatus.setText("Signed out");
+        mStatus.setText(R.string.signed_out);
     }
 
     @Override
