@@ -158,6 +158,7 @@ public class mBus_SignInActivity extends FragmentActivity implements
                     mSignInProgress = STATE_SIGNING_IN;
                 } else {
                     mSignInProgress = SIGNED_IN;
+                    goToHomeScreen();
                 }
 
                 if (!mGoogleApiClient.isConnecting()) {

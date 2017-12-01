@@ -35,7 +35,7 @@ public class WeatherController {
         String icon = "";
         if(actualId == 800){
             long currentTime = new Date().getTime();
-            if(currentTime>=sunrise && currentTime<sunset) {
+            if(currentTime >= sunrise && currentTime < sunset) {
                 icon = "&#xf00d;";
             } else {
                 icon = "&#xf02e;";
