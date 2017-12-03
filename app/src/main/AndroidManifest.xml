@@ -28,9 +28,11 @@
         <activity android:name=".views.mBus_SignInActivity" />
         <activity android:name=".views.mBus_WeatherActivity" />
         <activity
+
             android:name=".views.mBus_HomeActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
