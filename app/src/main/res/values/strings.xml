@@ -44,4 +44,12 @@
         App Concerns:
         <a href="mailto:support@cleverfinger.com.au?Subject=Lost%20Password" target="_top">support@mBus.idk</a>
     </string>
+    <string name="select_photo">Select Photo</string>
+    <string name="user_profile_image">User Profile Image</string>
+    <string name="name">Name</string>
+    <string name="john_doe">John Doe</string>
+    <string name="gender">gender</string>
+    <string name="bus_information">Bus Information</string>
+    <string name="bus_booked">Bus Booked</string>
+    <string name="number_of_trips">Number of Trips</string>
 </resources>

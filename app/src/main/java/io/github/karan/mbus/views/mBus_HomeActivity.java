@@ -75,7 +75,10 @@ public class mBus_HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            // Handle the camera action
+            Intent intent = new Intent(getApplicationContext(), mBus_ProfileActivity.class);
+            startActivity(intent);
+            finish();
+
         } else if (id == R.id.nav_available_buses) {
 
         } else if (id == R.id.nav_weather) {

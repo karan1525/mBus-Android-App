@@ -1,9 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="io.github.karan.mbus.views.mBus_ProfileActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btnSelectPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_photo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:contentDescription="@string/user_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mr_button_connected_17_light" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/gender_weight_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/weight_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="start|center"
+            android:text="@string/name">
+        </TextView>
+
+        <EditText
+            android:id="@+id/user_name"
+            android:inputType="textCapWords"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="start|center"
+            android:hint="@string/john_doe">
+        </EditText>
+
+        <TextView
+            android:id="@+id/gender_text_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:gravity="start|center"
+            android:text="@string/gender">
+        </TextView>
+
+
+        <Spinner
+            android:id="@+id/gender_spinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="start|center"
+            android:textAlignment="center"
+            android:entries="@array/genders">
+        </Spinner>
+
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/average_weekly_table"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:stretchColumns="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gender_weight_layout">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/user_info"
+                android:text="@string/bus_information"
+                android:layout_span="2"
+                android:gravity="start"
+                android:textSize="26sp"
+                android:padding="3dip" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/bus_booked"
+                android:text="@string/bus_booked"
+                android:gravity="start"
+                android:textSize="23sp"
+                android:padding="3dip" />
+
+            <TextView
+                android:id="@+id/bus_booked_content_view"
+                android:text="@string/n_a"
+                android:gravity="end"
+                android:padding="3dip"
+                android:textSize="23sp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tripsTaken"
+                android:text="@string/number_of_trips"
+                android:gravity="start"
+                android:textSize="23sp"
+                android:padding="3dip" />
+
+            <TextView
+                android:id="@+id/trips_taken_content_view"
+                android:text="@string/n_a"
+                android:gravity="end"
+                android:padding="3dip"
+                android:textSize="23sp"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
