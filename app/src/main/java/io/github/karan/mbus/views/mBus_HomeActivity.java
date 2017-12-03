@@ -93,7 +93,7 @@ public class mBus_HomeActivity extends AppCompatActivity
         } else if (id == R.id.check_maps) {
 
         } else if (id == R.id.next_trip) {
-            
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
