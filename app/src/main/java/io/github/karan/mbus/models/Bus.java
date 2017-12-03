@@ -7,11 +7,11 @@ package io.github.karan.mbus.models;
 
 public class Bus {
 
-    private String number;
+    private Long number;
     private String from;
     private String to;
-    public int price;
-    public String deptTime;
+    private int price;
+    private String deptTime;
     private String arriveTime;
     private int seats;
 
@@ -24,7 +24,7 @@ public class Bus {
      * @param seats Number of seats available on bus
      * @param price Ticket price of bus
      **/
-    public Bus(String number, String from, String to, String dept, String arrive, int seats, int price){
+    public Bus(Long number, String from, String to, String dept, String arrive, int seats, int price){
         this.number = number;
         this.from = from;
         this.to = to;
@@ -33,11 +33,68 @@ public class Bus {
         this.seats = seats;
         this.price = price;
     }
+
+    public Bus() {
+
+    }
+
     /**
      * @return identifier of a bus object
      **/
-    public String getNumber() {
+    public Long getNumber() {
         return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getDeptTime() {
+        return deptTime;
+    }
+
+    public void setDeptTime(String deptTime) {
+        this.deptTime = deptTime;
+    }
+
+    public String getArriveTime() {
+        return arriveTime;
+    }
+
+    public void setArriveTime(String arriveTime) {
+        this.arriveTime = arriveTime;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 
     /**

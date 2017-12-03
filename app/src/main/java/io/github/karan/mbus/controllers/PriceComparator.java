@@ -18,9 +18,9 @@ public class PriceComparator implements Comparator<Bus> {
      **/
     public int compare(Bus o1, Bus o2) {
 
-        if (o1.price > o2.price)
+        if (o1.getPrice() > o2.getPrice())
             return 1;
-        else if (o1.price < o2.price)
+        else if (o1.getPrice() < o2.getPrice())
             return -1;
         else
             return 0;
