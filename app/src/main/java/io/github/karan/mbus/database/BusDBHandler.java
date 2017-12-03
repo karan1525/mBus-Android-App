@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * A class that manages all the DB
  * for the Buses
+ *
+ * Code Citation:
+ * https://www.androidtutorialpoint.com/storage/android-sqlite-database-tutorial/
  */
 
 public class BusDBHandler extends SQLiteOpenHelper {

@@ -14,6 +14,9 @@ import android.support.v7.app.AlertDialog;
 /**
  * A class to get permissions
  * at runtime
+ *
+ * CODE CITATION
+ * http://www.theappguruz.com/blog/android-take-photo-camera-gallery-code-sample
  */
 
 public class Utility {

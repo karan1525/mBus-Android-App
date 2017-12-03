@@ -2,7 +2,6 @@ package io.github.karan.mbus.views;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -15,11 +14,15 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.sdsmdg.tastytoast.TastyToast;
 
 import io.github.karan.mbus.R;
 import io.github.karan.mbus.controllers.Utility;
@@ -27,16 +30,16 @@ import io.github.karan.mbus.controllers.Utility;
 
 public class mBus_ProfileActivity extends AppCompatActivity {
 
-    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    private Button btnSelect;
+    private final int REQUEST_CAMERA = 0;
+    private final int SELECT_FILE = 1;
     private ImageView ivImage;
-    private String userChoosenTask;
+    private String userChosenTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_bus__profile);
-        btnSelect = (Button) findViewById(R.id.btnSelectPhoto);
+        Button btnSelect = findViewById(R.id.btnSelectPhoto);
         btnSelect.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -44,20 +47,21 @@ public class mBus_ProfileActivity extends AppCompatActivity {
                 selectImage();
             }
         });
-        ivImage = (ImageView) findViewById(R.id.ivImage);
+        ivImage = findViewById(R.id.ivImage);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(userChoosenTask.equals("Take Photo"))
+                    if(userChosenTask.equals("Take Photo"))
                         cameraIntent();
-                    else if(userChoosenTask.equals("Choose from Library"))
+                    else if(userChosenTask.equals("Choose from Library"))
                         galleryIntent();
                 } else {
-                    //code for deny
+                    TastyToast.makeText(getApplicationContext(),"Permission Denied",
+                            TastyToast.LENGTH_LONG, TastyToast.ERROR);
                 }
                 break;
         }
@@ -71,16 +75,16 @@ public class mBus_ProfileActivity extends AppCompatActivity {
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
+            public void onClick(@NonNull DialogInterface dialog, int item) {
                 boolean result = Utility.checkPermission(mBus_ProfileActivity.this);
 
                 if (items[item].equals("Take Photo")) {
-                    userChoosenTask ="Take Photo";
+                    userChosenTask = "Take Photo";
                     if(result)
                         cameraIntent();
 
                 } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask ="Choose from Library";
+                    userChosenTask = "Choose from Library";
                     if(result)
                         galleryIntent();
 
@@ -107,7 +111,7 @@ public class mBus_ProfileActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
@@ -118,9 +122,11 @@ public class mBus_ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void onCaptureImageResult(Intent data) {
+    private void onCaptureImageResult(@NonNull Intent data) {
+        @SuppressWarnings("ConstantConditions")
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        assert thumbnail != null;
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
         File destination = new File(Environment.getExternalStorageDirectory(),
@@ -128,12 +134,11 @@ public class mBus_ProfileActivity extends AppCompatActivity {
 
         FileOutputStream fo;
         try {
+            //noinspection ResultOfMethodCallIgnored
             destination.createNewFile();
             fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -142,12 +147,13 @@ public class mBus_ProfileActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
+    private void onSelectFromGalleryResult(@Nullable Intent data) {
 
-        Bitmap bm=null;
+        Bitmap bm = null;
         if (data != null) {
             try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(),
+                        data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }

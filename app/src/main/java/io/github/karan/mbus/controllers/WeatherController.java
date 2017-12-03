@@ -20,6 +20,9 @@ import java.util.Locale;
  * A class that represents the controller for
  * all the weather information for the city the user is
  * travelling to
+ *
+ * Code citation:
+ * https://www.androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
  */
 
 public class WeatherController {
