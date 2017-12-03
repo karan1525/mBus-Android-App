@@ -6,4 +6,19 @@
     <string name="signing_in">Signing In</string>
     <string name="signed_out">Signed out</string>
     <string name="weather_check">Check Weather</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="user_email">kbhargava1525@gmail.com</string>
+    <string name="user_name">Karan Bhargava</string>
+    <string name="mbus_logo">mBus_logo</string>
+    <string name="profile">Profile</string>
+    <string name="available_buses">Available Buses</string>
+    <string name="weather">Weather</string>
+    <string name="settings">Settings</string>
+    <string name="information">Information</string>
+    <string name="help">Help</string>
 </resources>

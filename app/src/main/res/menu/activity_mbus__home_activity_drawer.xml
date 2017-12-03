@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_action_account_box"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_available_buses"
+            android:icon="@drawable/ic_action_directions_bus"
+            android:title="@string/available_buses" />
+        <item
+            android:id="@+id/nav_weather"
+            android:icon="@drawable/ic_action_cloud_queue"
+            android:title="@string/weather" />
+        <item
+            android:id="@+id/nav_sign_out"
+            android:icon="@drawable/ic_action_exit_to_app"
+            android:title="@string/sign_out" />
+    </group>
+
+    <item android:title="@string/settings">
+        <menu>
+            <item
+                android:id="@+id/nav_information"
+                android:icon="@drawable/ic_action_perm_device_information"
+                android:title="@string/information" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_action_help"
+                android:title="@string/help" />
+        </menu>
+    </item>
+
+</menu>

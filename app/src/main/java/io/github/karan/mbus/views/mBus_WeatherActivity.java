@@ -1,9 +1,8 @@
 package io.github.karan.mbus.views;
 
-import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.widget.TextView;
 
@@ -25,7 +24,8 @@ public class mBus_WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_bus__weather);
 
-        Typeface weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(),
+
+        Typeface weatherFont = Typeface.createFromAsset(getAssets(),
                 "fonts/weathericons-regular-webfont.ttf");
 
         cityField = findViewById(R.id.city_field);
@@ -40,31 +40,24 @@ public class mBus_WeatherActivity extends AppCompatActivity {
         WeatherController.placeIdTask asyncTask =
                 new WeatherController.placeIdTask(new WeatherController.AsyncResponse() {
 
-            public void processFinish(
-                    String weather_city, String weather_description, String weather_temperature,
-                    String weather_humidity, String weather_pressure, String weather_updatedOn,
-                    String weather_iconText, String sun_rise) {
+            public void processFinish(String weather_city, String weather_description,
+                                      String weather_temperature, String weather_humidity,
+                                      String weather_pressure, String weather_updatedOn,
+                                      String weather_iconText, String sun_rise) {
 
                 cityField.setText(weather_city);
                 updatedField.setText(weather_updatedOn);
                 detailsField.setText(weather_description);
                 currentTemperatureField.setText(weather_temperature);
-                String humidity = "Humidity: "+ weather_humidity;
-                humidity_field.setText(humidity);
+                String humidity = "Humidity: " + weather_humidity;
                 String pressure = "Pressure: " + weather_pressure;
+                humidity_field.setText(humidity);
                 pressure_field.setText(pressure);
                 weatherIcon.setText(Html.fromHtml(weather_iconText));
 
             }
         });
-        asyncTask.execute("37.3351420", "-121.8812760"); //  asyncTask.execute("Latitude", "Longitude")
+        asyncTask.execute("25.180000", "89.530000"); //  asyncTask.execute("Latitude", "Longitude")
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, mBus_HomeActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

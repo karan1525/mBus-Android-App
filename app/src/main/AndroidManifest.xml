@@ -25,9 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.mBus_HomeActivity" />
         <activity android:name=".views.mBus_SignInActivity" />
-        <activity android:name=".views.mBus_WeatherActivity"></activity>
+        <activity android:name=".views.mBus_WeatherActivity" />
+        <activity
+            android:name=".views.mBus_HomeActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

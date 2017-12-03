@@ -72,7 +72,7 @@ public class WeatherController {
         private AsyncResponse delegate = null;//Call back interface
 
         public placeIdTask(@Nullable AsyncResponse asyncResponse) {
-            delegate = asyncResponse;//Assigning call back interface through constructor
+            delegate = asyncResponse; //Assigning call back interface through constructor
         }
 
         @Nullable
@@ -92,18 +92,18 @@ public class WeatherController {
         @Override
         protected void onPostExecute(@Nullable JSONObject json) {
             try {
-                if (json != null) {
+                if(json != null){
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
                     DateFormat df = DateFormat.getDateTimeInstance();
 
 
-                    String city = json.getString("name").toUpperCase(Locale.US) + ", " +
-                            json.getJSONObject("sys").getString("country");
-                    String description = details.getString
-                            ("description").toUpperCase(Locale.US);
-                    String temperature = String.format(java.util.Locale.US,"%.2f",
-                            main.getDouble("temp")) + "°";
+                    String city = json.getString("name").toUpperCase(Locale.US) + ", "
+                            + json.getJSONObject("sys").getString("country");
+                    String description = details.getString("description")
+                            .toUpperCase(Locale.US);
+                    String temperature = String.format(java.util.Locale.US,
+                            "%.2f", main.getDouble("temp"))+ "°";
                     String humidity = main.getString("humidity") + "%";
                     String pressure = main.getString("pressure") + " hPa";
                     String updatedOn = df.format(new Date(json.getLong("dt") * 1000));
@@ -113,9 +113,8 @@ public class WeatherController {
 
                     assert delegate != null;
                     delegate.processFinish(city, description, temperature, humidity, pressure,
-                            updatedOn, iconText, "" + (
-                                    json.getJSONObject("sys").getLong("sunrise") * 1000));
-
+                            updatedOn, iconText, ""+
+                                    (json.getJSONObject("sys").getLong("sunrise") * 1000));
                 }
             } catch (JSONException e) {
                 //Log.e(LOG_TAG, "Cannot process JSON results", e);
@@ -145,18 +144,14 @@ public class WeatherController {
 
             // This value will be 404 if the request was not
             // successful
-            if(data.getInt("cod") != 200) {
-
+            if(data.getInt("cod") != 200){
                 return null;
             }
-
             return data;
-
         } catch(Exception e) {
 
             e.printStackTrace();
             return null;
         }
     }
-
 }
