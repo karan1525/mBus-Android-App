@@ -3,6 +3,8 @@ package io.github.karan.mbus.views;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import io.github.karan.mbus.R;
+
 public class mBus_NextBusActivity extends AppCompatActivity {
 
     @Override

@@ -58,7 +58,7 @@ public class mBus_WeatherActivity extends AppCompatActivity {
 
             }
         });
-        asyncTask.execute("25.180000", "89.530000"); //  asyncTask.execute("Latitude", "Longitude")
+        asyncTask.execute("37.6624", "-121.8747"); //  asyncTask.execute("Latitude", "Longitude")
 
     }
 
