@@ -80,6 +80,9 @@ public class mBus_HomeActivity extends AppCompatActivity
             finish();
 
         } else if (id == R.id.nav_available_buses) {
+            Intent intent = new Intent(getApplicationContext(), mBus_AvailableBusesActivity.class);
+            startActivity(intent);
+            finish();
 
         } else if (id == R.id.nav_weather) {
             Intent intent = new Intent(getApplicationContext(), mBus_WeatherActivity.class);
