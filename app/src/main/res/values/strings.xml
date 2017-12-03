@@ -21,4 +21,8 @@
     <string name="settings">Settings</string>
     <string name="information">Information</string>
     <string name="help">Help</string>
+    <string name="delete_all_reservations">Delete All Reservations</string>
+    <string name="reservations">Reservations</string>
+    <string name="check_maps">Check Maps</string>
+    <string name="check_next_trip">Check Next Trip</string>
 </resources>

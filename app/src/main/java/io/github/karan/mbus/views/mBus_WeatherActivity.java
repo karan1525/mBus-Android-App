@@ -1,5 +1,6 @@
 package io.github.karan.mbus.views;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -59,5 +60,14 @@ public class mBus_WeatherActivity extends AppCompatActivity {
         });
         asyncTask.execute("25.180000", "89.530000"); //  asyncTask.execute("Latitude", "Longitude")
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(this, mBus_HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

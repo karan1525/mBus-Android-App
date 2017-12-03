@@ -18,9 +18,22 @@
             android:title="@string/weather" />
         <item
             android:id="@+id/nav_sign_out"
-            android:icon="@drawable/ic_action_exit_to_app"
-            android:title="@string/sign_out" />
+            android:icon="@drawable/ic_action_delete_forever"
+            android:title="@string/delete_all_reservations" />
     </group>
+
+    <item android:title="@string/reservations">
+        <menu>
+            <item
+                android:id="@+id/check_maps"
+                android:icon="@drawable/ic_action_map"
+                android:title="@string/check_maps" />
+            <item
+                android:id="@+id/next_trip"
+                android:icon="@drawable/ic_action_next_week"
+                android:title="@string/check_next_trip" />
+        </menu>
+    </item>
 
     <item android:title="@string/settings">
         <menu>
