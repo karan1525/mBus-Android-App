@@ -87,8 +87,14 @@ public class mBus_HomeActivity extends AppCompatActivity
             //DELETE USER DB HERE
 
         } else if (id == R.id.nav_information) {
+            Intent intent = new Intent(getApplicationContext(), mBus_InformationActivity.class);
+            startActivity(intent);
+            finish();
 
         } else if (id == R.id.nav_help) {
+            Intent intent = new Intent(getApplicationContext(), mBus_HelpActivity.class);
+            startActivity(intent);
+            finish();
 
         } else if (id == R.id.check_maps) {
 

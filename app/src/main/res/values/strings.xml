@@ -25,4 +25,23 @@
     <string name="reservations">Reservations</string>
     <string name="check_maps">Check Maps</string>
     <string name="check_next_trip">Check Next Trip</string>
+    <string name="faq">FAQ</string>
+    <string name="faq_q1a">Why mBus? \n Ever thought you needed an Uber but for 10 or more people?
+    \n This is where mBus comes in. Book a whole bus for your travels!</string>
+    <string name="faq_q2a">What is the \'m\' in mBus? \n The \'m\' stands for
+        Mortezaie, who is a man I will never forget.</string>
+    <string name="faq_q3a">Why only Pleasanton? \n This is the place the elusive Mortezaie resides \n
+        Why not visit the man who inspired this all together?.</string>
+    <string name="faq_q4a">Plans to expand? \n Yes! Suggest some places!</string>
+    <string name="n_a">N/A</string>
+    <string name="overview">Overview</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="overview_about_us">mBus is an app that came to be when there was a need to go to
+    Mortezaie\'s place but there were too many people. Rather than spending billions on 40 Uber\'s
+    we decided to make an Uber bus and name it after the one and only, Mortezaie </string>
+    <string name="general_concerns">General Concerns:
+        <a href="mailto:support@cleverfinger.com.au?Subject=Lost%20Password" target="_top">general@mBus.idk</a>\n
+        App Concerns:
+        <a href="mailto:support@cleverfinger.com.au?Subject=Lost%20Password" target="_top">support@mBus.idk</a>
+    </string>
 </resources>
