@@ -1,5 +1,7 @@
 package io.github.karan.mbus.controllers;
 
+import android.support.annotation.NonNull;
+
 import java.util.Comparator;
 
 import io.github.karan.mbus.models.Bus;
@@ -16,7 +18,8 @@ public class PriceComparator implements Comparator<Bus> {
      * @return 0 if first and second bus's ticket price is the same
      * @return -1 if first's ticket price is less than second bus
      **/
-    public int compare(Bus o1, Bus o2) {
+    @SuppressWarnings("JavaDoc")
+    public int compare(@NonNull Bus o1, @NonNull Bus o2) {
 
         if (o1.getPrice() > o2.getPrice())
             return 1;

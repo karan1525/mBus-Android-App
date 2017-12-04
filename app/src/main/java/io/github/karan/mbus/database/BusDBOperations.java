@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -18,10 +19,12 @@ import io.github.karan.mbus.models.User;
  * on the database
  */
 
+@SuppressWarnings("unused")
 public class BusDBOperations {
 
     private static final String LOGTAG = "BUS_MANAGEMENT_SYSTEM";
 
+    @NonNull
     private final SQLiteOpenHelper dbhandler;
     private SQLiteDatabase database;
 
@@ -58,7 +61,8 @@ public class BusDBOperations {
         dbhandler.close();
     }
 
-    public User addUser(User userToAdd) {
+    @NonNull
+    public User addUser(@NonNull User userToAdd) {
         ContentValues values = new ContentValues();
         values.put(BusDBHandler.COLUMN_NAME, userToAdd.getName());
         values.put(BusDBHandler.COLUMN_GENDER, userToAdd.getGender());
@@ -70,6 +74,7 @@ public class BusDBOperations {
     }
 
     // Getting single User
+    @NonNull
     public User getUser(long id) {
 
         Cursor cursor = database.query(BusDBHandler.TABLE_USERS, allUserColumns,
@@ -80,6 +85,7 @@ public class BusDBOperations {
 
         //public User(long userId, String name, String gender, String busBooked, String tripsTaken)
 
+        assert cursor != null;
         User u = new User(Long.parseLong(cursor.getString(0)),
                 cursor.getString(1),cursor.getString(2),cursor.getString(3),
                 cursor.getString(4));
@@ -89,6 +95,7 @@ public class BusDBOperations {
         return u;
     }
 
+    @NonNull
     public List<User> getAllUsers() {
 
         Cursor cursor = database.query(BusDBHandler.TABLE_USERS, allUserColumns,
@@ -118,7 +125,7 @@ public class BusDBOperations {
     }
 
     // Updating Employee
-    public int updateUser(User user) {
+    public int updateUser(@NonNull User user) {
 
         ContentValues values = new ContentValues();
         values.put(BusDBHandler.COLUMN_NAME, user.getName());
@@ -132,13 +139,14 @@ public class BusDBOperations {
                         + "=?",new String[] { String.valueOf(user.getUserId())});
     }
 
-    public void removeUser(User user) {
+    public void removeUser(@NonNull User user) {
 
         database.delete(BusDBHandler.TABLE_USERS,
                 BusDBHandler.COLUMN_ID + "=" + user.getUserId(), null);
     }
 
-    public Bus addBus(Bus busToAdd) {
+    @NonNull
+    public Bus addBus(@NonNull Bus busToAdd) {
         ContentValues values = new ContentValues();
         values.put(BusDBHandler.COLUMN_FROM, busToAdd.getFrom());
         values.put(BusDBHandler.COLUMN_TO, busToAdd.getTo());
@@ -152,6 +160,7 @@ public class BusDBOperations {
         return busToAdd;
     }
 
+    @NonNull
     public Bus getBus(long id) {
 
         Cursor cursor = database.query(BusDBHandler.TABLE_BUSES, allBusColumns,
@@ -160,6 +169,7 @@ public class BusDBOperations {
         if (cursor != null)
             cursor.moveToFirst();
 
+        assert cursor != null;
         Bus b = new Bus(Long.parseLong(cursor.getString(0)),cursor.getString(1),
                 cursor.getString(2),cursor.getString(3),
                 cursor.getString(4), Integer.parseInt(cursor.getString(5)),
@@ -171,6 +181,7 @@ public class BusDBOperations {
         return b;
     }
 
+    @NonNull
     public List<Bus> getAllBuses() {
 
         Cursor cursor = database.query(BusDBHandler.TABLE_BUSES, allBusColumns,
@@ -195,11 +206,13 @@ public class BusDBOperations {
                 allBuses.add(bus);
             }
         }
+
+        cursor.close();
         // return All Buses
         return allBuses;
     }
 
-    public int updateBus(Bus bus) {
+    public int updateBus(@NonNull Bus bus) {
 
         ContentValues values = new ContentValues();
         values.put(BusDBHandler.COLUMN_FROM, bus.getFrom());
@@ -215,7 +228,7 @@ public class BusDBOperations {
                 new String[] { String.valueOf(bus.getNumber())});
     }
 
-    public void removeBus(Bus bus) {
+    public void removeBus(@NonNull Bus bus) {
 
         database.delete(BusDBHandler.TABLE_BUSES,
                 BusDBHandler.COLUMN_ID + "=" +
