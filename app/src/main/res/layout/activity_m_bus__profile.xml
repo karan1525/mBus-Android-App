@@ -31,7 +31,7 @@
         <ImageView
             android:id="@+id/ivImage"
             android:contentDescription="@string/user_profile_image"
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="350dp"
             android:src="@drawable/ic_mr_button_connected_17_light" />
 

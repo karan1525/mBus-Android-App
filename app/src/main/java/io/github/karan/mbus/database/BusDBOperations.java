@@ -73,7 +73,7 @@ public class BusDBOperations {
     public User getUser(long id) {
 
         Cursor cursor = database.query(BusDBHandler.TABLE_USERS, allUserColumns,
-                BusDBHandler.COLUMN_ID + "=?",new String[]{String.valueOf(id)},
+                BusDBHandler.COLUMN_USER_ID + "=?",new String[]{String.valueOf(id)},
                 null,null, null, null);
         if (cursor != null)
             cursor.moveToFirst();

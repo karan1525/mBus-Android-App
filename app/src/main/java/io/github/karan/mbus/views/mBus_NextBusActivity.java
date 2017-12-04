@@ -1,5 +1,6 @@
 package io.github.karan.mbus.views;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -43,13 +44,12 @@ public class mBus_NextBusActivity extends AppCompatActivity {
                 TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
 
         busOps = new BusDBOperations(this);
-
-        populateDataFromDB();
     }
 
     protected void onResume() {
         super.onResume();
         busOps.open();
+        populateDataFromDB();
     }
 
     protected void onPause() {
@@ -59,16 +59,22 @@ public class mBus_NextBusActivity extends AppCompatActivity {
 
     private void populateDataFromDB() {
 
-        Bus currentUserBus = busOps.getBus(1);
+        Bus currentUserBus = busOps.getBus(generateRandom());
 
         busId.setText(String.valueOf(currentUserBus.getNumber()));
         from.setText(currentUserBus.getFrom());
         to.setText(currentUserBus.getTo());
         departure.setText(currentUserBus.getDeptTime());
         arrival.setText(currentUserBus.getArriveTime());
-        seats.setText(generateRandomSeat());
-        price.setText(currentUserBus.getPrice());
+        seats.setText(String.valueOf(generateRandomSeat()));
+        price.setText(String.valueOf(currentUserBus.getPrice()));
 
+    }
+
+    private int generateRandom() {
+        Random rand = new Random();
+
+        return rand.nextInt(6) + 1;
     }
 
     private String generateRandomSeat() {
@@ -94,5 +100,14 @@ public class mBus_NextBusActivity extends AppCompatActivity {
             return String.valueOf(row) + "D";
 
         }
+    }
+
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(this, mBus_HomeActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }

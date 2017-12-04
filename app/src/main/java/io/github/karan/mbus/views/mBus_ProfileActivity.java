@@ -74,13 +74,6 @@ public class mBus_ProfileActivity extends AppCompatActivity {
 
         mBusOps = new BusDBOperations(this);
 
-        //mSavedUser = mBusOps.getUser(1);
-
-        if (!mIsFirstRun) {
-            checkIfUserExists();
-            getAllData();
-        }
-
     }
 
     private void checkIfUserExists() {
@@ -274,6 +267,13 @@ public class mBus_ProfileActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mBusOps.open();
+
+        mSavedUser = mBusOps.getUser(1);
+
+        if (!mIsFirstRun) {
+            checkIfUserExists();
+            getAllData();
+        }
     }
 
     @Override
