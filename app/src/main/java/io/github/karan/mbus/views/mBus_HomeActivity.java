@@ -105,6 +105,9 @@ public class mBus_HomeActivity extends AppCompatActivity
         } else if (id == R.id.check_maps) {
 
         } else if (id == R.id.next_trip) {
+            Intent intent = new Intent(getApplicationContext(), mBus_NextBusActivity.class);
+            startActivity(intent);
+            finish();
 
         }
 
