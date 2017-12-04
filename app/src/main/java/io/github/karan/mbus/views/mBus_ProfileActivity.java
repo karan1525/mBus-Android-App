@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,12 +21,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sdsmdg.tastytoast.TastyToast;
 
 import io.github.karan.mbus.R;
 import io.github.karan.mbus.controllers.Utility;
+import io.github.karan.mbus.database.BusDBOperations;
+import io.github.karan.mbus.models.User;
 
 
 public class mBus_ProfileActivity extends AppCompatActivity {
@@ -34,6 +40,17 @@ public class mBus_ProfileActivity extends AppCompatActivity {
     private final int SELECT_FILE = 1;
     private ImageView ivImage;
     private String userChosenTask;
+
+    private BusDBOperations mBusOps;
+
+    private EditText nameEditText;
+    private Spinner genderSpinner;
+    private TextView busBooked;
+    private TextView tripsTaken;
+
+    private static boolean mIsFirstRun = true;
+    private static User mSavedUser;
+    private User newUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +65,63 @@ public class mBus_ProfileActivity extends AppCompatActivity {
             }
         });
         ivImage = findViewById(R.id.ivImage);
+
+        newUser = new User();
+        nameEditText = findViewById(R.id.user_name);
+        genderSpinner = findViewById(R.id.gender_spinner);
+        busBooked = findViewById(R.id.bus_booked_content_view);
+        tripsTaken = findViewById(R.id.trips_taken_content_view);
+
+        mBusOps = new BusDBOperations(this);
+
+        //mSavedUser = mBusOps.getUser(1);
+
+        if (!mIsFirstRun) {
+            checkIfUserExists();
+            getAllData();
+        }
+
+    }
+
+    private void checkIfUserExists() {
+        User myCurrentUser = mBusOps.getUser(1);
+        nameEditText.setText(myCurrentUser.getName());
+        nameEditText.setEnabled(false);
+
+        String gender = myCurrentUser.getGender();
+        if (gender.equalsIgnoreCase("Male")) {
+            genderSpinner.setSelection(0);
+        } else {
+            genderSpinner.setSelection(1);
+        }
+
+        mIsFirstRun = false;
+    }
+
+    private void getAllData() {
+
+        String busNumberBooked = "";
+        String numberTripsTaken = "";
+
+        List<User> allUsers = mBusOps.getAllUsers();
+
+        for (User user: allUsers) {
+            busNumberBooked = user.getBusBooked();
+            numberTripsTaken = user.getTripsTaken();
+        }
+
+        busBooked.setText(busNumberBooked);
+        tripsTaken.setText(numberTripsTaken);
+
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         switch (requestCode) {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED) {
                     if(userChosenTask.equals("Take Photo"))
                         cameraIntent();
                     else if(userChosenTask.equals("Choose from Library"))
@@ -166,10 +233,53 @@ public class mBus_ProfileActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
+        if (mIsFirstRun) {
+            mIsFirstRun = false;
+            saveUserInformation();
+        }
+
         Intent intent = new Intent(this, mBus_HomeActivity.class);
         startActivity(intent);
         finish();
 
+    }
+
+    private void saveUserInformation() {
+        if (!nameEditText.getText().toString().isEmpty()) {
+            newUser.setName(nameEditText.getText().toString());
+        }
+
+        newUser.setGender(genderSpinner.getSelectedItem().toString());
+        newUser.setTripsTaken("0");
+        newUser.setBusBooked("0");
+
+        if((!mSavedUser.getName().equalsIgnoreCase(newUser.getName())) && !
+                nameEditText.getText().toString().isEmpty()) {
+            mSavedUser = mBusOps.addUser(newUser);
+            TastyToast.makeText(this, "User " + newUser.getName()
+                            + " has been added successfully",
+                    TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+        } else if (nameEditText.getText().toString().isEmpty()) {
+            TastyToast.makeText(this, "User adding failed! Try again",
+                    TastyToast.LENGTH_LONG, TastyToast.ERROR);
+        } else {
+            TastyToast.makeText(this, "User " + newUser.getName()
+                            + " was already in the DB. Try again",
+                    TastyToast.LENGTH_LONG, TastyToast.CONFUSING);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBusOps.open();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mBusOps.close();
     }
 
 }

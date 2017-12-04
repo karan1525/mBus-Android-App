@@ -43,7 +43,7 @@ public class BusDBHandler extends SQLiteOpenHelper {
                     COLUMN_DEPARTURE + " TEXT, " +
                     COLUMN_ARRIVAL + " TEXT, " +
                     COLUMN_SEATS + " NUMERIC, " +
-                    COLUMN_PRICE + " NUMBERIC" + ")";
+                    COLUMN_PRICE + " NUMERIC" + ")";
 
     private static final String USERS_TABLE =
             " CREATE TABLE " + TABLE_USERS + " (" +
@@ -51,7 +51,7 @@ public class BusDBHandler extends SQLiteOpenHelper {
                     COLUMN_NAME + " TEXT, " +
                     COLUMN_GENDER + " TEXT, " +
                     COLUMN_BOOKED + " NUMERIC, " +
-                    COLUMN_TRIPS + " NUMERIC" + ")";
+                    COLUMN_TRIPS + " NUMERIC AUTOINCREMENT" + ")";
 
     BusDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
