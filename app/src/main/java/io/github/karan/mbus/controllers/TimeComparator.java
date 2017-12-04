@@ -1,5 +1,8 @@
 package io.github.karan.mbus.controllers;
 
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 
 import io.github.karan.mbus.models.Bus;
@@ -19,8 +22,8 @@ public class TimeComparator implements Comparator<Bus> {
      **/
 
     public int compare(Bus o1, Bus o2) {
-        int time1 = Integer.parseInt(o1.getDeptTime());
-        int time2 = Integer.parseInt(o2.getDeptTime());
+        int time1 = convertTimeTo24Hours(o1.getDeptTime());
+        int time2 = convertTimeTo24Hours(o2.getDeptTime());
 
         if (time1 > time2)
             return 1;
@@ -28,5 +31,25 @@ public class TimeComparator implements Comparator<Bus> {
             return -1;
         else
             return 0;
+    }
+
+    private int convertTimeTo24Hours(String timeToConvert) {
+
+        SimpleDateFormat date12Format = new SimpleDateFormat("hh:mma");
+
+        SimpleDateFormat date24Format = new SimpleDateFormat("HH:mm");
+
+        String toReturn = "";
+
+        try {
+           toReturn = date24Format.format(date12Format.parse(timeToConvert));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        toReturn = toReturn.replace(":", "");
+        Log.d("Test", toReturn);
+
+        return Integer.parseInt(toReturn);
     }
 }

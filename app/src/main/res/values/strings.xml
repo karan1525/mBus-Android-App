@@ -16,7 +16,6 @@
     <string name="user_name">Karan Bhargava</string>
     <string name="mbus_logo">mBus_logo</string>
     <string name="profile">Profile</string>
-    <string name="available_buses">Available Buses</string>
     <string name="weather">Weather</string>
     <string name="settings">Settings</string>
     <string name="information">Information</string>
@@ -60,4 +59,6 @@
     <string name="trip_from">Trip From:</string>
     <string name="bus_number">Bus Number:</string>
     <string name="your_next_reservation">Your Next Reservation:</string>
+    <string name="available_buses">Available Buses</string>
+    <string name="sorted_by">Sorted by:</string>
 </resources>

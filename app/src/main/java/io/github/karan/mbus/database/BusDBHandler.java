@@ -21,8 +21,8 @@ public class BusDBHandler extends SQLiteOpenHelper {
 
     static final String TABLE_BUSES = "buses";
     static final String COLUMN_ID = "busID";
-    static final String COLUMN_FROM = "from";
-    static final String COLUMN_TO = "to";
+    static final String COLUMN_FROM = "busFrom";
+    static final String COLUMN_TO = "busTo";
     static final String COLUMN_DEPARTURE = "depart";
     static final String COLUMN_ARRIVAL = "arrival";
     static final String COLUMN_SEATS = "seats";
@@ -36,14 +36,15 @@ public class BusDBHandler extends SQLiteOpenHelper {
     static final String COLUMN_TRIPS = "trips";
 
     private static final String BUSES_TABLE =
-            " CREATE TABLE " + TABLE_BUSES + " (" +
+            "CREATE TABLE " + TABLE_BUSES + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_FROM + " TEXT, " +
                     COLUMN_TO + " TEXT, " +
                     COLUMN_DEPARTURE + " TEXT, " +
                     COLUMN_ARRIVAL + " TEXT, " +
                     COLUMN_SEATS + " NUMERIC, " +
-                    COLUMN_PRICE + " NUMERIC" + ")";
+                    COLUMN_PRICE + " NUMERIC " +
+                    ")";
 
     private static final String USERS_TABLE =
             " CREATE TABLE " + TABLE_USERS + " (" +
@@ -51,7 +52,8 @@ public class BusDBHandler extends SQLiteOpenHelper {
                     COLUMN_NAME + " TEXT, " +
                     COLUMN_GENDER + " TEXT, " +
                     COLUMN_BOOKED + " NUMERIC, " +
-                    COLUMN_TRIPS + " NUMERIC AUTOINCREMENT" + ")";
+                    COLUMN_TRIPS + " NUMERIC" +
+                    ")";
 
     BusDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

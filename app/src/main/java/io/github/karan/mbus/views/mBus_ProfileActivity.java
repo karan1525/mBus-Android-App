@@ -253,8 +253,8 @@ public class mBus_ProfileActivity extends AppCompatActivity {
         newUser.setTripsTaken("0");
         newUser.setBusBooked("0");
 
-        if((!mSavedUser.getName().equalsIgnoreCase(newUser.getName())) && !
-                nameEditText.getText().toString().isEmpty()) {
+        if((!nameEditText.getText().toString().isEmpty() &&
+                !mSavedUser.getName().equalsIgnoreCase(newUser.getName()))) {
             mSavedUser = mBusOps.addUser(newUser);
             TastyToast.makeText(this, "User " + newUser.getName()
                             + " has been added successfully",
