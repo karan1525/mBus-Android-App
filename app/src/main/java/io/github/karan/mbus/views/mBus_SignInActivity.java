@@ -23,6 +23,7 @@ import io.github.karan.mbus.R;
 /**
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
  * profile.
+ * CODE CITATION: https://github.com/googlesamples/google-services
  */
 public class mBus_SignInActivity extends AppCompatActivity implements
         View.OnClickListener {
@@ -32,6 +33,9 @@ public class mBus_SignInActivity extends AppCompatActivity implements
 
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
+
+    static String userName;
+    static String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,10 +122,8 @@ public class mBus_SignInActivity extends AppCompatActivity implements
 
     private void goToHomeScreen(String displayName, String email) {
         Intent i = new Intent(this, mBus_HomeActivity.class);
-        Bundle extras = new Bundle();
-        extras.putString("name", displayName);
-        extras.putString("email", email);
-        i.putExtras(extras);
+        userName = displayName;
+        userEmail = email;
         startActivity(i);
         finish();
     }

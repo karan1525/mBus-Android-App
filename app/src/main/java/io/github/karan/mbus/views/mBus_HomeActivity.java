@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,9 +25,6 @@ import io.github.karan.mbus.R;
 
 public class mBus_HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private TextView mAccountName;
-    private TextView mAccountEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +45,11 @@ public class mBus_HomeActivity extends AppCompatActivity
 
         View headerView =  navigationView.getHeaderView(0);
 
-        mAccountName = headerView.findViewById(R.id.account_name);
-        mAccountEmail = headerView.findViewById(R.id.account_email);
-        
-        Intent extras = getIntent();
-        mAccountName.setText(extras.getStringExtra("name"));
-        mAccountEmail.setText(extras.getStringExtra("email"));
+        TextView mAccountName = headerView.findViewById(R.id.account_name);
+        TextView mAccountEmail = headerView.findViewById(R.id.account_email);
+
+        mAccountName.setText(mBus_SignInActivity.userName);
+        mAccountEmail.setText(mBus_SignInActivity.userEmail);
 
     }
 
@@ -139,7 +134,7 @@ public class mBus_HomeActivity extends AppCompatActivity
         return true;
     }
 
-    public void signOut() {
+    private void signOut() {
         GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
                 GoogleSignInOptions.DEFAULT_SIGN_IN);
         final Intent intent = new Intent(this, mBus_SignInActivity.class);
