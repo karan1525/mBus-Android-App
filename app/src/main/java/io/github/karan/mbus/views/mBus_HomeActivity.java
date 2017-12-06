@@ -9,13 +9,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import io.github.karan.mbus.R;
 
 public class mBus_HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private TextView mAccountName;
+    private TextView mAccountEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,15 @@ public class mBus_HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView =  navigationView.getHeaderView(0);
+
+        mAccountName = headerView.findViewById(R.id.account_name);
+        mAccountEmail = headerView.findViewById(R.id.account_email);
+        
+        Intent extras = getIntent();
+        mAccountName.setText(extras.getStringExtra("name"));
+        mAccountEmail.setText(extras.getStringExtra("email"));
 
     }
 
@@ -90,6 +112,7 @@ public class mBus_HomeActivity extends AppCompatActivity
             finish();
 
         } else if (id == R.id.nav_sign_out) {
+            signOut();
             //DELETE USER DB HERE
 
         } else if (id == R.id.nav_information) {
@@ -114,5 +137,20 @@ public class mBus_HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void signOut() {
+        GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+                GoogleSignInOptions.DEFAULT_SIGN_IN);
+        final Intent intent = new Intent(this, mBus_SignInActivity.class);
+        signInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(getApplicationContext(), "You have successfully logged out!",
+                                Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+                    }
+                });
     }
 }
