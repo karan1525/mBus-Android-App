@@ -135,14 +135,14 @@ public class BusDBOperations {
 
         // updating row
         return database.update(BusDBHandler.TABLE_USERS, values,
-                BusDBHandler.COLUMN_ID
+                BusDBHandler.COLUMN_USER_ID
                         + "=?",new String[] { String.valueOf(user.getUserId())});
     }
 
     public void removeUser(@NonNull User user) {
 
         database.delete(BusDBHandler.TABLE_USERS,
-                BusDBHandler.COLUMN_ID + "=" + user.getUserId(), null);
+                BusDBHandler.COLUMN_USER_ID + "=" + user.getUserId(), null);
     }
 
     @NonNull

@@ -12,6 +12,8 @@ import com.sdsmdg.tastytoast.TastyToast;
 
 import io.github.karan.mbus.R;
 import io.github.karan.mbus.database.BusDBOperations;
+import io.github.karan.mbus.models.Bus;
+import io.github.karan.mbus.models.User;
 
 public class mBus_BookBusActivity extends AppCompatActivity {
 
@@ -69,6 +71,24 @@ public class mBus_BookBusActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Bus currentBus = mBusOps.getBus(mSelectedBusNumber);
+                currentBus.setSeats(currentBus.getSeats() - 1);
+                mBusOps.updateBus(currentBus);
+
+                User currentUser = mBusOps.getUser(1);
+                currentUser.setBusBooked(String.valueOf(mSelectedBusNumber));
+
+                mBusOps.updateUser(currentUser);
+
+                String success = "Thank you for choosing mBus! \n Your spot is secured!";
+
+                TastyToast.makeText(getApplicationContext(), success,
+                        TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+
+                Intent intent = new Intent(mBus_BookBusActivity.this,
+                        mBus_HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
