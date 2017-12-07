@@ -65,4 +65,14 @@
     <string name="title_location_permission">Location Permission</string>
     <string name="ok">OK</string>
     <string name="text_location_permission">Allow mBus to get your location?</string>
+    <string name="app_logo">App Logo</string>
+    <string name="book_a_trip">Book a Trip</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="pleasanton">Pleasanton</string>
+    <string name="total_people">Total People:</string>
+    <string name="total_people_hint">XX</string>
+    <string name="date">Date</string>
+    <string name="mm_dd_yyyy">mm/dd/yyyy</string>
+    <string name="continue_button">Continue</string>
 </resources>
