@@ -29,7 +29,7 @@ import android.widget.TextView;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import io.github.karan.mbus.R;
-import io.github.karan.mbus.controllers.Utility;
+import io.github.karan.mbus.controllers.CameraUtility;
 import io.github.karan.mbus.database.BusDBOperations;
 import io.github.karan.mbus.models.User;
 
@@ -112,7 +112,7 @@ public class mBus_ProfileActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         switch (requestCode) {
-            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+            case CameraUtility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] ==
                         PackageManager.PERMISSION_GRANTED) {
                     if(userChosenTask.equals("Take Photo"))
@@ -136,7 +136,7 @@ public class mBus_ProfileActivity extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(@NonNull DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(mBus_ProfileActivity.this);
+                boolean result = CameraUtility.checkPermission(mBus_ProfileActivity.this);
 
                 if (items[item].equals("Take Photo")) {
                     userChosenTask = "Take Photo";

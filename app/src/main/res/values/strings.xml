@@ -61,4 +61,8 @@
     <string name="available_buses">Available Buses</string>
     <string name="sorted_by">Sorted by:</string>
     <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="title_activity_m_bus__location">Map</string>
+    <string name="title_location_permission">Location Permission</string>
+    <string name="ok">OK</string>
+    <string name="text_location_permission">Allow mBus to get your location?</string>
 </resources>

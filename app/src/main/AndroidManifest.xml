@@ -2,11 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.karan.mbus">
 
+    <permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:protectionLevel="dangerous" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.example.mapdemo.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -36,7 +48,15 @@
         <activity android:name=".views.mBus_InformationActivity" />
         <activity android:name=".views.mBus_ProfileActivity" />
         <activity android:name=".views.mBus_AvailableBusesActivity" />
-        <activity android:name=".views.mBus_NextBusActivity"></activity>
+        <activity android:name=".views.mBus_NextBusActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".views.mBus_LocationActivity">
+           </activity>
     </application>
 
 </manifest>
