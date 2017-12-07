@@ -99,10 +99,10 @@ public class Bus {
 
     /**
      * @return the identifier, departure time, arrival time,
-     *  price, start location, and destination of bus object
+     *  price, seats, start location, and destination of bus object
      **/
     public String toString() {
         return "\n Bus Number: \t "+number +"\n Depart:\t "+deptTime+"\t \t Arrive:\t "+
-                arriveTime+"\n Price:\t $"+price+"\n From:  "+ from+ "\t \t To:  "+ to;
+                arriveTime+"\n Price:\t $"+price+"\t \t Seats:\t "+ + seats + "\n From:  "+ from+ "\t \t To:  "+ to;
     }
 }
