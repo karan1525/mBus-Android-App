@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -17,22 +18,30 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
 
 import io.github.karan.mbus.Manifest;
 import io.github.karan.mbus.R;
 
 public class mBus_LocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private GoogleMap mMap;
-    LocationManager mLocationManager;
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private LatLng PleasantonLatLng;
+    private ArrayList<LatLng> mLocationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_bus__location);
+
+        PleasantonLatLng = new LatLng(37.6624, -121.8747);
+        mLocationList = new ArrayList<>();
 
         if(checkLocationPermission()) {
 
@@ -43,15 +52,6 @@ public class mBus_LocationActivity extends FragmentActivity implements OnMapRead
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -79,15 +79,30 @@ public class mBus_LocationActivity extends FragmentActivity implements OnMapRead
                         new LatLng(l.getLatitude(), l.getLongitude())).title("Current location"));
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                         new LatLng(l.getLatitude(), l.getLongitude()), 16));
+
+                addPolylineToLocation(l);
             }
         }
-
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-    public boolean checkLocationPermission() {
+    private void addPolylineToLocation(Location l) {
+
+        PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
+        LatLng currentLatLng = new LatLng(l.getLatitude(), l.getLongitude());
+        options.add(currentLatLng);
+        options.add(PleasantonLatLng);
+
+        mMap.addMarker(new MarkerOptions().position(PleasantonLatLng).title("Bus Drop Off"));
+        UiSettings mapSettings;
+        mapSettings = mMap.getUiSettings();
+
+        mapSettings.setZoomControlsEnabled(true);
+
+        mMap.addPolyline(options);
+
+    }
+
+    private boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -96,9 +111,6 @@ public class mBus_LocationActivity extends FragmentActivity implements OnMapRead
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.title_location_permission)
                         .setMessage(R.string.text_location_permission)
