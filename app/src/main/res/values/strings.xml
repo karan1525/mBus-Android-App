@@ -75,4 +75,7 @@
     <string name="date">Date: </string>
     <string name="mm_dd_yyyy">mm/dd/yyyy</string>
     <string name="continue_button">Continue</string>
+    <string name="confirm_trip">Confirm this trip?</string>
+    <string name="cancel_trip">Cancel</string>
+    <string name="okay_trip">OK</string>
 </resources>
