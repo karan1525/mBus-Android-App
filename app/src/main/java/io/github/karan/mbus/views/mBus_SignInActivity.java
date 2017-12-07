@@ -42,7 +42,7 @@ public class mBus_SignInActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_m_bus__sign_in);
 
-        // Views
+        /* Views */
         mStatusTextView = findViewById(R.id.statuslabel);
 
         // Button listeners

@@ -49,7 +49,8 @@ public class mBus_AvailableBusesActivity extends AppCompatActivity implements Ad
         list.setVisibility(ListView.VISIBLE);
 
         list.setAdapter(adapter);
-        final Intent intMe = new Intent(this, mBus_BookBusActivity.class);
+        final Intent intMe;
+        intMe = new Intent(this, mBus_BookBusActivity.class);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
