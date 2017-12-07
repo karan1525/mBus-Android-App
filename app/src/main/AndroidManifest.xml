@@ -53,8 +53,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".views.mBus_LocationActivity"></activity>
-        <activity android:name=".views.mBus_BookBusActivity"></activity>
+        <activity android:name=".views.mBus_LocationActivity" />
+        <activity android:name=".views.mBus_BookBusActivity" />
+        <activity android:name=".views.mBus_BusDetailActivity"></activity>
     </application>
 
 </manifest>

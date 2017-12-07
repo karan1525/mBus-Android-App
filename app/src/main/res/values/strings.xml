@@ -52,6 +52,7 @@
     <string name="number_of_trips">Number of Trips</string>
     <string name="price">Price:</string>
     <string name="seat">Seat:</string>
+    <string name="seats">Seats</string>
     <string name="arrival">Arrival:</string>
     <string name="departure">Departure:</string>
     <string name="trip_to">Trip To:</string>

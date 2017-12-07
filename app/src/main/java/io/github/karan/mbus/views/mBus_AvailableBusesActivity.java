@@ -57,7 +57,24 @@ public class mBus_AvailableBusesActivity extends AppCompatActivity implements Ad
                 String selected = (String) (list.getItemAtPosition(position));
                 intMe.putExtra("Bus", selected);
                 startActivity(intMe);
+                finish();
+            }
+        });
 
+
+        final Intent busDetail = new Intent(this, mBus_BusDetailActivity.class);
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String selected = (String) (list.getItemAtPosition(position));
+                busDetail.putExtra("Bus", selected);
+                startActivity(busDetail);
+                finish();
+
+
+                return false;
             }
         });
         spinMe.setOnItemSelectedListener(this);
