@@ -1,6 +1,7 @@
 package io.github.karan.mbus.views;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -29,6 +30,14 @@ public class mBus_BusDetailActivity extends AppCompatActivity {
             int mSelectedBusNumber = Integer.parseInt(parseIntent(selected));
 
             getBusFromDB(mSelectedBusNumber);
+        }
+
+        Configuration configuration = getResources().getConfiguration();
+
+        if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Intent intent = new Intent(this, mBus_WeatherActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
