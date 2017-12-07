@@ -108,7 +108,6 @@ public class mBus_HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_sign_out) {
             signOut();
-            //DELETE USER DB HERE
 
         } else if (id == R.id.nav_information) {
             Intent intent = new Intent(getApplicationContext(), mBus_InformationActivity.class);
