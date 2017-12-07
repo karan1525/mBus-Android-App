@@ -1,5 +1,6 @@
 package io.github.karan.mbus.views;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +27,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import io.github.karan.mbus.R;
 
 public class mBus_HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    int mYear, mMonth, mDay;
+    private Button continueButton;
+    private Spinner mFromSpinner;
+    private EditText dateEditText;
+    private EditText totalPeople;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +65,69 @@ public class mBus_HomeActivity extends AppCompatActivity
 
         mAccountName.setText(mBus_SignInActivity.userName);
         mAccountEmail.setText(mBus_SignInActivity.userEmail);
+
+        mFromSpinner = findViewById(R.id.from_spinner);
+        String[] categories = new String[]{"San Francisco", "Santa Clara", "San Jose", "Santa Clarita"};
+        ArrayAdapter<String> myAdapt = new ArrayAdapter<>
+                (this, android.R.layout.simple_spinner_item,categories);
+        myAdapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mFromSpinner.setAdapter(myAdapt);
+
+        dateEditText = findViewById(R.id.date_content_view);
+        continueButton = findViewById(R.id.continue_button);
+        totalPeople = findViewById(R.id.total_people_content_view);
+        setupDate();
+        setupContinueButton();
+
+    }
+
+    private void setupDate() {
+        dateEditText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //To show current date in the date picker
+                Calendar mCurrentDate = Calendar.getInstance();
+                mYear = mCurrentDate.get(Calendar.YEAR);
+                mMonth = mCurrentDate.get(Calendar.MONTH);
+                mDay = mCurrentDate.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog mDatePicker = new DatePickerDialog(mBus_HomeActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker,
+                                          int selectedYear, int selectedMonth, int selectedDay) {
+
+                        String selectedDate = selectedMonth + "/" + selectedDay + "/" +  selectedYear;
+                        dateEditText.setText(selectedDate);
+                    }
+                }, mYear, mMonth, mDay);
+                mDatePicker.setTitle("Select date");
+                mDatePicker.show();  }
+        });
+    }
+
+    private void setupContinueButton() {
+
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mBus_HomeActivity.this,
+                        mBus_AvailableBusesActivity.class);
+                Bundle bundle = new Bundle();
+                ArrayList<String> information = new ArrayList<>();
+
+                information.add(0, mFromSpinner.getSelectedItem().toString()); //starting
+                information.add(1, "Pleasanton"); //ending
+                information.add(2, totalPeople.getText().toString()); //totalPeople
+                information.add(3, dateEditText.getText().toString());
+
+                bundle.putStringArrayList("info", information);
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 

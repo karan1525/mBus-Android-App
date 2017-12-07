@@ -22,6 +22,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import io.github.karan.mbus.Manifest;
 import io.github.karan.mbus.R;
@@ -45,6 +46,9 @@ public class mBus_LocationActivity extends FragmentActivity implements OnMapRead
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
+        } else {
+            TastyToast.makeText(getApplicationContext(), "Location permission denied",
+                    TastyToast.LENGTH_LONG, TastyToast.ERROR);
         }
     }
 
