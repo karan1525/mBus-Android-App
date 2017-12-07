@@ -23,8 +23,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.util.ArrayList;
-
 import io.github.karan.mbus.Manifest;
 import io.github.karan.mbus.R;
 
@@ -33,7 +31,6 @@ public class mBus_LocationActivity extends FragmentActivity implements OnMapRead
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private GoogleMap mMap;
     private LatLng PleasantonLatLng;
-    private ArrayList<LatLng> mLocationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +38,6 @@ public class mBus_LocationActivity extends FragmentActivity implements OnMapRead
         setContentView(R.layout.activity_m_bus__location);
 
         PleasantonLatLng = new LatLng(37.6624, -121.8747);
-        mLocationList = new ArrayList<>();
 
         if(checkLocationPermission()) {
 
