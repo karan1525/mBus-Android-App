@@ -94,6 +94,7 @@ public class mBus_ProfileActivity extends AppCompatActivity {
         mIsFirstRun = false;
     }
 
+    @SuppressWarnings({"UnusedAssignment", "unused"})
     private void getAllData() {
 
         String busNumberBooked = "";
