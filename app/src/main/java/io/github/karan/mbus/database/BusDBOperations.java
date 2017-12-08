@@ -62,6 +62,7 @@ public class BusDBOperations {
     }
 
     @NonNull
+    //CREATE DATA
     public User addUser(@NonNull User userToAdd) {
         ContentValues values = new ContentValues();
         values.put(BusDBHandler.COLUMN_NAME, userToAdd.getName());
@@ -75,6 +76,7 @@ public class BusDBOperations {
 
     // Getting single User
     @NonNull
+    //READ DATA
     public User getUser(long id) {
 
         Cursor cursor = database.query(BusDBHandler.TABLE_USERS, allUserColumns,
@@ -124,7 +126,7 @@ public class BusDBOperations {
         return users;
     }
 
-    // Updating Employee
+    // Updating User
     public int updateUser(@NonNull User user) {
 
         ContentValues values = new ContentValues();
@@ -139,6 +141,7 @@ public class BusDBOperations {
                         + "=?",new String[] { String.valueOf(user.getUserId())});
     }
 
+    //Removing user
     public void removeUser(@NonNull User user) {
 
         database.delete(BusDBHandler.TABLE_USERS,

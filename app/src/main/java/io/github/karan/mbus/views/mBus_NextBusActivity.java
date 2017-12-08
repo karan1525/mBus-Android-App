@@ -105,8 +105,6 @@ public class mBus_NextBusActivity extends AppCompatActivity implements OnGesture
         });
         builder.show();
 
-
-
         return true;
     }
 
