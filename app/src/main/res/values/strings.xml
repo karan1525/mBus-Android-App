@@ -79,4 +79,5 @@
     <string name="confirm_trip">Confirm this trip?</string>
     <string name="cancel_trip">Cancel</string>
     <string name="okay_trip">OK</string>
+    <string name="double_tap">Double Tap Gesture Here</string>
 </resources>
