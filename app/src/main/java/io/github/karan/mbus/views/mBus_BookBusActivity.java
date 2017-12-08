@@ -76,6 +76,7 @@ public class mBus_BookBusActivity extends AppCompatActivity {
 
                 User currentUser = mBusOps.getUser(1);
                 currentUser.setBusBooked(String.valueOf(mSelectedBusNumber));
+                currentUser.setTripsTaken(currentUser.getTripsTaken() + 1);
 
                 mBusOps.updateUser(currentUser);
 

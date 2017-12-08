@@ -81,6 +81,9 @@ public class mBus_ProfileActivity extends AppCompatActivity {
         nameEditText.setText(myCurrentUser.getName());
         nameEditText.setEnabled(false);
 
+        busBooked.setText(R.string.user_bus_number);
+        tripsTaken.setText(R.string.user_trips_taken);
+
         String gender = myCurrentUser.getGender();
         if (gender.equalsIgnoreCase("Male")) {
             genderSpinner.setSelection(0);
@@ -103,8 +106,8 @@ public class mBus_ProfileActivity extends AppCompatActivity {
             numberTripsTaken = user.getTripsTaken();
         }
 
-        busBooked.setText(busNumberBooked);
-        tripsTaken.setText(numberTripsTaken);
+        busBooked.setText(R.string.user_bus_number);
+        tripsTaken.setText(R.string.user_trips_taken);
 
     }
 
@@ -243,8 +246,8 @@ public class mBus_ProfileActivity extends AppCompatActivity {
         }
 
         newUser.setGender(genderSpinner.getSelectedItem().toString());
-        newUser.setTripsTaken("0");
-        newUser.setBusBooked("0");
+        newUser.setTripsTaken(String.valueOf(R.string.user_trips_taken));
+        newUser.setBusBooked(String.valueOf(R.string.user_bus_number));
 
         if((!nameEditText.getText().toString().isEmpty() &&
                 !mSavedUser.getName().equalsIgnoreCase(newUser.getName()))) {

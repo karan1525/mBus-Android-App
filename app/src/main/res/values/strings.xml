@@ -80,4 +80,6 @@
     <string name="cancel_trip">Cancel</string>
     <string name="okay_trip">OK</string>
     <string name="double_tap">Double Tap Gesture Here</string>
+    <string name="user_bus_number">4L</string>
+    <string name="user_trips_taken">3</string>
 </resources>

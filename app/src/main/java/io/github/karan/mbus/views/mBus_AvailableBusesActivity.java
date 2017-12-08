@@ -90,6 +90,7 @@ public class mBus_AvailableBusesActivity extends AppCompatActivity implements Ad
             getAllBuses();
 
             displayBusList(pleasantonBuses);
+            mIsGettingSpecificData = false;
         } else {
             ArrayList<String> mReservationInfo = extras.getStringArrayList("info");
             assert mReservationInfo != null;
