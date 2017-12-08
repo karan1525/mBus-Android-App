@@ -1,6 +1,8 @@
 package io.github.karan.mbus.views;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +19,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import io.github.karan.mbus.R;
 
@@ -36,6 +39,13 @@ public class mBus_SignInActivity extends AppCompatActivity implements
 
     static String userName;
     static String userEmail;
+
+    private static final String MyPREFERENCES = "MyPrefs" ;
+    private static final String NAME = "nameKey";
+    private static final String EMAIL = "emailKey";
+    private static final String SAVED_TO_PREFS = "UserName and Email in SharedPrefs";
+
+    private SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +79,8 @@ public class mBus_SignInActivity extends AppCompatActivity implements
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
         // [END customize_button]
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
     @Override
@@ -124,6 +136,7 @@ public class mBus_SignInActivity extends AppCompatActivity implements
         Intent i = new Intent(this, mBus_HomeActivity.class);
         userName = displayName;
         userEmail = email;
+        saveToSharedPrefs(displayName, email);
         startActivity(i);
         finish();
     }
@@ -188,5 +201,16 @@ public class mBus_SignInActivity extends AppCompatActivity implements
                 revokeAccess();
                 break;
         }
+    }
+
+    private void saveToSharedPrefs(String name, String email) {
+
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(NAME, name);
+        editor.putString(EMAIL, email);
+        editor.apply();
+
+        TastyToast.makeText(getApplicationContext(), SAVED_TO_PREFS,
+                TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
     }
 }
